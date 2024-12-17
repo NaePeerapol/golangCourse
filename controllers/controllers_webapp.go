@@ -77,7 +77,7 @@ func GetDeleteDogs(c *fiber.Ctx) error {
 	return c.Status(200).JSON(dogs)
 }
 
-func GetDogs(c *fiber.Ctx) error {
+func GetAllDogs(c *fiber.Ctx) error {
 	db := database.DBConn.Debug()
 	var dogs []m.Dogs
 
