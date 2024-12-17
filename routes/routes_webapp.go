@@ -23,4 +23,5 @@ func WebAppRoutes(app *fiber.App) {
 	v2.Delete("/:id", c.DeleteDog)
 	v2.Get("/ddog", c.GetDeleteDogs)
 	v2.Get("/", c.GetDogs)
+	v2.Get("/:id", c.GetDogId)
 }
