@@ -82,7 +82,21 @@ func GetDogs(c *fiber.Ctx) error {
 	var dogs []m.Dogs
 
 	db.Find(&dogs) //SELECT * FROM `dogs` WHERE `dogs`.`deleted_at` IS NULL
-	
+
 	return c.Status(200).JSON(dogs)
 
+}
+
+func GetDogId(c *fiber.Ctx) error {
+	db := database.DBConn
+	id := c.Params("id")
+	var dog m.Dogs
+
+	result := db.Find(&dog, id)
+
+	if result.RowsAffected == 0 {
+		return c.Status(404).SendString("ไม่พบข้อมูลที่ต้องการ")
+	}
+
+	return c.Status(200).JSON(dog)
 }
