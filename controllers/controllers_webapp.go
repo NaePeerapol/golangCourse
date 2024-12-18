@@ -51,14 +51,14 @@ func CreateDog(c *fiber.Ctx) error {
 }
 
 func DeleteDog(c *fiber.Ctx) error {
-	db := database.DBConn
-	id := c.Params("id")
+	db := database.DBConn //เชื่อมต่อ database
+	id := c.Params("id") //รัับค่าจาก parameter :id
 	var dog m.Dogs
 
 	result := db.Delete(&dog, id)
 
 	if result.RowsAffected == 0 {
-		return c.Status(404).SendString("ไม่ผมข้อมูลที่ผู้ใช้ต้องการ")
+		return c.Status(404).SendString("ไม่พบข้อมูลที่ผู้ใช้ต้องการ")
 	}
 
 	return c.Status(200).SendString("ลบข้อมูลเรียบร้อยแล้ว!!!")
